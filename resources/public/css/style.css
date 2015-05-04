@@ -1,0 +1,74 @@
+/* and 000 111 222 333 *** USTONISHT! */
+/* B-NO-IT! Plant Maker. */
+
+header {
+  margin: 0.1em;
+  font-size: 0.5em;
+  text-align: center;
+}
+
+.pants {
+  border: 2px solid yellow;
+  margin: 1em;
+  padding: 0.5em;;
+  font-size: 3em;
+}
+
+.pocket {
+  text-align: center;
+  width: 5em;
+  border: 4px solid lightblue;
+  border-top: dashed gray;
+  margin: 0;
+}
+
+.land {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 2px solid brown;
+  height: 5em;
+}
+
+.plot {
+  flex-grow: 1;
+  border: 2px solid white;
+  margin: 1em;
+  padding: 1em 0;
+  text-align: center;
+  min-width: 5em;
+}
+
+.plot:hover {
+  cursor: pointer;
+  color: Black;
+  border-color: black;
+}
+
+.growing {
+  color: blue;
+  background: green;
+}
+
+.dirt {
+  color: red;
+  background: brown;
+}
+
+.planted {
+  color: pink;
+  background: orange;
+}
+
+.seeds {
+  background: orange;
+  color: Blue;
+}
+
+.win {
+  font-size: 3em;
+}
+
+.playagain {
+  font-size: 0.76em;
+}
