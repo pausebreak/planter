@@ -67,8 +67,10 @@
 (q/defcomponent land
   "A grid of plots"
   [props]
-  (apply div {:className "land"} "Field of Plants, Dirt, and Seeds"
-    (map plot (:plots props))))
+  (div {:className "land"}
+    (header {} "Field of Plants, Dirt and Seeds")
+      (apply div {:className "field"}
+        (map plot (:plots props)))))
 
 (defn- playagain
   [& _]

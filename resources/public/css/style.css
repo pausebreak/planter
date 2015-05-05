@@ -3,7 +3,6 @@
 
 header {
   margin: 0.1em;
-  font-size: 0.5em;
   text-align: center;
 }
 
@@ -11,7 +10,6 @@ header {
   border: 2px solid yellow;
   margin: 1em;
   padding: 0.5em;;
-  font-size: 3em;
 }
 
 .pocket {
@@ -23,20 +21,39 @@ header {
 }
 
 .land {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
   border: 2px solid brown;
-  height: 5em;
+  padding: 0.5em;;
+}
+
+.field {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .plot {
-  flex-grow: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex 1 1 auto;
   border: 2px solid white;
   margin: 1em;
   padding: 1em 0;
   text-align: center;
-  min-width: 5em;
+  min-width: 10em;
 }
 
 .plot:hover {
