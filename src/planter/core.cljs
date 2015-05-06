@@ -1,6 +1,9 @@
 (ns ^:figwheel-always planter.core
-    (:require [quiescent.core :as q]
-              [quiescent.dom :refer [header h1 div img button]]))
+  (:require [cljs.core.async :refer [chan close! <!]]
+            [quiescent.core :as q]
+            [quiescent.dom :refer [header h1 div img button]])
+  (:require-macros
+    [cljs.core.async.macros :as m :refer [go]]))
 
 ;;plant maker/Jeans/Seeds/Field of plants,Dirt, and Seeds/Hello_World.  
 
@@ -18,6 +21,11 @@
   "Helper for the println debug crowd"
   [& s]
   (. js/console (log (apply pr-str s))))
+
+(defn timeout [ms]
+  (let [c (chan)]
+    (js/setTimeout (fn [] (close! c)) ms)
+    c))
 
 (defn- did-win?
   [seeds]
@@ -44,18 +52,28 @@
       (header {} "Seeds")
       spec)))
 
+(defn- grow-plot
+  [p]
+  (go
+    (<! (timeout 3600))
+    (swap! state #(update-in % [:plots (:id p) :stage] next-stage))
+    (<! (timeout 3600))
+    (swap! state #(update-in % [:plots (:id p) :stage] next-stage))))
+
 (defn- plot-click 
   [p]
-  (let [idx (:id p)
+  (let [id (:id p)
         next-state (next-stage (:stage p))]
     (when (or (not (= (:stage p) "dirt"))
               (> (:pocket @state) 0))
-      (swap! state #(update-in % [:plots idx :stage] next-stage))
+      (swap! state #(update-in % [:plots id :stage] next-stage))
       (cond 
         (= next-state "dirt")
           (swap! state #(update-in % [:pocket] + 2))
         (= next-state "planted")
-          (swap! state #(update-in % [:pocket] dec))))))
+          (do
+            (swap! state #(update-in % [:pocket] dec))
+            (grow-plot p))))))
 
 (q/defcomponent plot
   "A seedable plot"
@@ -113,4 +131,5 @@
 
 ;(swap! state #(assoc-in % [:pocket] 1))
 ;(swap! state #(assoc-in % [:win?] false))
-(playagain)
+;(playagain)
+(render! @state)
